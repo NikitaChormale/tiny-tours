@@ -30,8 +30,46 @@ app.get("/health", (req, res) => {
   message: "server is healthy",
  });
 });
- app.post("/signup",async (req, res) => {
-  const {name,email,mobile,city,country,password} = req.body;
+
+app.post("/signup",async (req, res) => {
+  const { name,email, mobile,city,country,password} = req.body;
+
+  if(!name){
+    return res.json({
+      success: false,
+      message:"name is required",
+      data: null,
+    });
+  }
+
+  if(!email){
+    return res.json({
+      success: false,
+      message:"email is required",
+      data: null,
+    });
+  }
+
+  if(!password){
+    return res.json({
+      success: false,
+      message:"password is required",
+      data: null,
+    })
+  }
+
+   const existinguser=await User.findOne({email}); 
+   if (existinguser){
+    return res.json({
+      success:false,
+      message:"user with this email already exists",
+      data:null,
+    });
+   }
+
+
+ 
+
  const newUser=new User({
   name,
   email,
@@ -54,8 +92,8 @@ data: savedUser,
     data:null,
   });
  }
+   });
 
- });
  
 
 
