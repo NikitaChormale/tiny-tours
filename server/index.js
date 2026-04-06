@@ -1,10 +1,8 @@
 import express from'express';
 import cors from "cors";
 import dotenv from "dotenv";
-dotenv.config();
 import connectDB from './db.js';
 import User from'./modules/user.js';
-
 
 dotenv.config();
 
@@ -30,6 +28,7 @@ app.get("/health", (req, res) => {
   message: "server is healthy",
  });
 });
+
 
 app.post("/signup",async (req, res) => {
   const { name,email, mobile,city,country,password} = req.body;
@@ -58,7 +57,8 @@ app.post("/signup",async (req, res) => {
     })
   }
 
-   const existinguser=await User.findOne({email}); 
+   const existinguser=await User.findOne({email});
+
    if (existinguser){
     return res.json({
       success:false,
@@ -67,8 +67,6 @@ app.post("/signup",async (req, res) => {
     });
    }
 
-
- 
 
  const newUser=new User({
   name,
@@ -94,8 +92,40 @@ data: savedUser,
  }
    });
 
- 
+   app.post ("/login",async(req,res) => {
+    const { email,password} = req.body;
 
+    if(!email){
+    return res.json({
+      success: false,
+      message:"email is required",
+      data: null,
+    });
+  }
+
+  if(!password){
+    return res.json({
+      success: false,
+      message:"password is required",
+      data: null,
+    })
+  
+  }
+  const existingUser=await User.findOne({email,password}).select("-password");
+  if(existingUser){
+    return res.json ({
+      success:true,
+      message: "login successfully",
+      data: existingUser,
+    });
+  } else{
+    return res.json ({
+      success:false,
+      message: "Invalid email or Password",
+      data: null,
+    });
+  }
+});
 
 
 

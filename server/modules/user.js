@@ -5,6 +5,12 @@ import { Schema,model } from "mongoose";
        required: true,
       unique:true,
    },
+   email:{
+      type : String,
+       required: true,
+      unique:true,
+
+   },
    mobile:{
       type:String,
    },
