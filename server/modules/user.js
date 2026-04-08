@@ -25,6 +25,6 @@ import { Schema,model } from "mongoose";
       required:true,
    },
  });
- const user =model("user",UserSchema);
+ const User =model("User",UserSchema);
 
- export default user;
+ export default User;

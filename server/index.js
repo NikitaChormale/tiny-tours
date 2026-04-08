@@ -5,7 +5,9 @@ import jwt from "jsonwebtoken"
 import connectDB from './db.js';
 import User from'./modules/user.js';
 import bcrypt from "bcrypt";
-import { get } from 'mongoose';
+
+import Tour from './modules/tour.js';
+
 
 
 dotenv.config();
@@ -199,7 +201,8 @@ const checkjwt= (req,res,next) =>{
   const Token =authorization && authorization.split (" ")[1];
 
   try {
-    const decoded= jwt.verify(Token,proccess.env.JWT_SECRET);
+    const decoded= jwt.verify(Token,process.env.JWT_SECRET);
+    req.user= decoded;
     next();
    }
    catch(err){
@@ -218,8 +221,46 @@ app.get("/api_v2",(req,res)=>{
 res.json({ message:"API v2 is working "});
 });
    
+app.post("/tours",checkjwt,  async (req, res) => {
+  const { title, description, cities, startDate, endDate, photos, userId } = req.body;
+
+  try {
+    const newTour = new Tour({
+      title,
+      description,
+      cities,
+      startDate,
+      endDate,
+      photos,
+      user:req.user.id ,
+    });
+
+    const savedTour = await newTour.save();
+
+    return res.status(201).json({
+      success: true,
+      message: "Tour created successfully",
+      data: savedTour,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Tour creation failed: ${error.message}`,
+      data: null,
+    });
+  }
+});
 
 
+app.get("/tours",checkjwt,async(req,res) => {
+  const tours = await Tour.find({ user:req.user.id}).populate("user","-password");
+
+  return res.json({
+    success:true,
+    message:"fetched tours successfully",
+    data:tours,
+  })
+})
 
 
 
