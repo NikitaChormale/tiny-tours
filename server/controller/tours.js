@@ -1,5 +1,6 @@
-
+import Tour from "../models/tour.js";
 import dotenv from "dotenv";
+
  dotenv.config();
 
 const getTours= async(req,res) => {
@@ -12,7 +13,8 @@ const getTours= async(req,res) => {
   });
 };
  const postTours =async (req, res) => {
-  const { title, description, cities, startDate, endDate, photos, userId } = req.body;
+  const { title, description, cities, startDate, endDate, photos, userId } =
+   req.body;
 
   try {
     const newTour = new Tour({
@@ -41,4 +43,45 @@ const getTours= async(req,res) => {
   }
 };
 
-export { getTours ,postTours};
+const putTours = async(req,res) => {
+  const user= req.user;
+  const userId= user.id;
+  const {id } =req.params;
+
+  const tour =await Tour.findById(id);
+  if(! tour){
+return res.json ({
+  success:true,
+  message:"tour not found ",
+  data:null,
+});
+}
+if(tour.user.toString()!==userId){
+  return res.json ({
+  success:false,
+  message:"unauthorized to update this tour",
+  data:null,
+});
+}
+
+const {title, description ,cities,startDates,endDate ,photos}=
+ req.body
+
+ const  updatedTour = await tour.updateOne({_id:id},{
+title, 
+description ,
+cities,
+startDates,
+endDate ,
+photos,
+ });
+
+
+return res.json ({
+  success:true,
+  message:"tour  updated successfully ",
+  data:updatedTour,
+  user,
+});
+}
+export { getTours ,postTours ,putTours};

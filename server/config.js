@@ -1,4 +1,4 @@
-const JWT_EXPIRATION =`1h`;
+const JWT_EXPIRATION =`7d`;
 
 
  export {JWT_EXPIRATION};
