@@ -4,6 +4,7 @@ import { useEffect,useState} from 'react';
 import { setTitle } from './../utils';
 import Input from "./../components/Input";
 import Button from './../components/Button';
+import {Link} from "react-router"
 
 
 
@@ -87,6 +88,10 @@ onChange={(e) =>{setNewUser({...newUser,password:e.target.value});
 }} 
 />
 <Button title="Signup" onClick={createUsers}/>
+
+<Link to ="/login"  className="mt-2 block text-blue-500">
+Don't have an account? Login
+</Link>
 </div>
 <Toaster position="top-center" reverseOrder={false}/>
   </div>

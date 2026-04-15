@@ -4,6 +4,7 @@ import { useEffect,useState} from 'react';
 import { setTitle } from './../utils';
 import Input from "./../components/Input";
 import Button from './../components/Button';
+import {Link} from "react-router"
 
 
 
@@ -26,9 +27,18 @@ const CheckLoginUsers = async () => {
     console.log(response.data);
 
     if (response.data.success) {
-      toast.success(response.data.message);
+      toast.success(response.data.message,{id:"loginsuccess"});
+      setCheckUser({
+        email:"",
+        password:"",
+      });
+
+      const {jwtToken,data}= response.data;
+
+      localStorage.setItem("userjwtToken",jwtToken);
+      localStorage.setItem("userData",JSON.stringify(data));
     } else {
-      toast.error(response.data.message);
+      toast.error(response.data.message,{id:"loginError"});
     }
 
   } catch (error) {
@@ -58,6 +68,10 @@ onChange={(e) =>
 }} 
 />
 <Button title="Login" onClick={CheckLoginUsers}/>
+
+<Link to ="/signup"  className="mt-2 block text-blue-500">
+Don't have an account? Signup
+</Link>
 </div>
 <Toaster position="top-center" reverseOrder={false}/>
   </div>
