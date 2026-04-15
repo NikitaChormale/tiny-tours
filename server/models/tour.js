@@ -1,48 +1,53 @@
-import { Schema,model } from "mongoose";
+import { Schema, model } from "mongoose";
 
- const tourSchema = new Schema({
-    
-    title: {
-      type: String,
-      required: true,
-      
-    },
+const tourSchema = new Schema({
 
-    description: {
-      type: String,
-      required: true, 
-    },
+  title: {
+    type: String,
+    required: true,
 
-    cities: {
-      type: [String],
-      required: true, 
-    },
-    startDate:{
-     type:Date,
+  },
 
-      },
-     endDate:{
-     type:Date,
-     
-      },
-    photos: {
-      type: [
-        {
-            imgurl:String,
-            title: String,
-            description: String,
-        }
-      ],
-      default:[],
-    },
-    user:{
-        type: Schema.Types.ObjectId,
-        ref:"User",
-        required: true,
-    },
-  });
+  description: {
+    type: String,
+    required: true,
+  },
+
+  cities: {
+    type: [String],
+    required: true,
+  },
+  startDate: {
+    type: Date,
+
+  },
+  endDate: {
+    type: Date,
+
+  },
+  photos: {
+    type: [
+      {
+        imgurl: String,
+        title: String,
+        description: String,
+      }
+    ],
+    default: [],
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+
+},
+  {
+    timestamps: true
+  }
+)
 
 
- const Tour =model("Tour",tourSchema);
+const Tour = model("Tour", tourSchema);
 
- export default Tour;
+export default Tour;
