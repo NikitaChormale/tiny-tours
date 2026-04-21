@@ -4,7 +4,8 @@ import { useEffect,useState} from 'react';
 import { setTitle } from './../utils';
 import Input from "./../components/Input";
 import Button from './../components/Button';
-import {Link} from "react-router"
+import {Link} from "react-router";
+import Navbar from "../components/Navbar";
 
 
 
@@ -37,6 +38,11 @@ const CheckLoginUsers = async () => {
 
       localStorage.setItem("userjwtToken",jwtToken);
       localStorage.setItem("userData",JSON.stringify(data));
+
+      setTimeout(() =>{
+        window.location.href ="/dashboad";
+      },1500)
+      
     } else {
       toast.error(response.data.message,{id:"loginError"});
     }
@@ -47,10 +53,13 @@ const CheckLoginUsers = async () => {
   }
 };
 return (
-  <div className="flex justify-center items-center h-screen">
+   <div >
+    <Navbar/>
+    
+   
 <h1>Login</h1>
-<div className='w-[300px] '>
-
+    
+    <div className='flex justify-centre items-center w[300px]'>
 <Input
 type='email'
 placeholder='Email'
