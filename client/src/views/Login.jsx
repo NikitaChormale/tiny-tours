@@ -59,7 +59,7 @@ return (
    
 <h1>Login</h1>
     
-    <div className='flex justify-centre items-center w[300px]'>
+    <div className='w-75 block mx-auto mt-20'>
 <Input
 type='email'
 placeholder='Email'
