@@ -47,10 +47,14 @@ function Login() {
       }
 
     } catch (error) {
-      console.error(error);
-      toast.error("Server error!");
-    }
-  };
+  console.log(error);
+  console.log(error.response);
+  console.log(error.response?.data);
+
+  toast.error(
+    error.response?.data?.message || "Server error!"
+  );
+}}
   return (
     <div >
       <Navbar />
