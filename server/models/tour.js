@@ -26,15 +26,11 @@ const tourSchema = new Schema({
 
   },
   photos: {
-    type: [
-      {
-        imgurl: String,
-        title: String,
-        description: String,
-      }
-    ],
-    default: [],
-  },
+     
+     type:[String],
+     default:[],
+
+      },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",

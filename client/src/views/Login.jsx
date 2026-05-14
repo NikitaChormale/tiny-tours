@@ -1,7 +1,7 @@
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useEffect,useState} from 'react';
-import { setTitle } from './../utils';
+import { setTitle} from './../utils';
 import Input from "./../components/Input";
 import Button from './../components/Button';
 import {Link} from "react-router";
@@ -34,14 +34,13 @@ const CheckLoginUsers = async () => {
         password:"",
       });
 
-      const {jwtToken,data}= response.data;
-
-      localStorage.setItem("userjwtToken",jwtToken);
-      localStorage.setItem("userData",JSON.stringify(data));
-
-      setTimeout(() =>{
-        window.location.href ="/dashboad";
-      },1500)
+       const {token,data}= response.data;
+     localStorage.setItem("userjwtToken",token);
+     localStorage.setItem("userData",JSON.stringify(data));
+     setTimeout(()=>{
+      window.location.href="/dashboard";
+     },1500)
+    
       
     } else {
       toast.error(response.data.message,{id:"loginError"});
@@ -51,7 +50,7 @@ const CheckLoginUsers = async () => {
     console.error(error);
     toast.error("Server error!");
   }
-};
+}; 
 return (
    <div >
     <Navbar/>

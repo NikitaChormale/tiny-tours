@@ -1,4 +1,3 @@
-
 import toast  from "react-hot-toast"
 const setTitle =(title) => {
 document.title = title;
@@ -7,17 +6,30 @@ document.title = title;
 const isUserLogin =() =>{
     const userjwtToken =localStorage.getItem("userjwtToken");
     return !!userjwtToken;
-};
-
-const getUserjwtToken = ()=>{
-const userjwtToken =localStorage.getItem("userjwtToken");
-return !!userjwtToken
-};
+}; 
 
 
-const getUserData =() =>{
+
+ const getUserjwtToken = ()=>{
+return localStorage.getItem("userjwtToken");
+ };
+
+/*
+ const getUserData =() => {
  const userData= localStorage.getItem("userData") || "{}";
- return JSON.parse(userData);
+
+return JSON.parse(userData);
+}; 
+*/
+
+ const getUserData = () => {
+  try {
+    const userData = localStorage.getItem("userData") || "{}";
+    return JSON.parse(userData);
+  } catch (error) {
+    console.log("Invalid JSON");
+    return {};
+  }
 };
 
 const logoutUser =() => {

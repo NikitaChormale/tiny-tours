@@ -110,13 +110,13 @@ const postLogin =async(req,res) => {
         expiresIn:JWT_EXPIRATION,
       }
     );
-    return res.json ({
-      success:true,
-      message: "login successfully",
-      data: existingUser,
-      jwttoken: jwtToken ,
-      
-    });
+    return res.json({
+  success: true,
+  message: "login successfully",
+  data: {
+    user: existingUser,
+  }, token: jwtToken,
+});
   }  else{
     return res.json ({
       success:false,

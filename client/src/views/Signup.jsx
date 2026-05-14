@@ -5,6 +5,7 @@ import { setTitle } from './../utils';
 import Input from "./../components/Input";
 import Button from './../components/Button';
 import {Link} from "react-router"
+import Navbar from "../components/Navbar";
 
 
 
@@ -12,10 +13,10 @@ function Signup() {
 
   const  [newUser,setNewUser] =useState({
     name: "",
-    email:"",
+   country:"",
     mobile: "",
     city: "",
-    country:"",
+    email:"",
     password:"",
   });
 
@@ -42,7 +43,10 @@ const createUsers = async () => {
   }
 };
 return (
+ 
   <div className="flex justify-center items-center h-screen">
+    <Navbar/>
+    
 <h1>Signup</h1>
 <div className='w-[300px] '>
 <Input
@@ -50,13 +54,6 @@ type='text'
 placeholder='Name'
 value={newUser.name}
 onChange={(e) =>{setNewUser({...newUser,name:e.target.value});
-}} 
-/>
-<Input
-type='email'
-placeholder='Email'
-value={newUser.email}
-onChange={(e) =>{setNewUser({...newUser,email:e.target.value});
 }} 
 />
 <Input
@@ -78,6 +75,13 @@ type='text'
 placeholder='Country'
 value={newUser.country}
 onChange={(e) =>{setNewUser({...newUser,country:e.target.value});
+}} 
+/>
+<Input
+type='email'
+placeholder='Email'
+value={newUser.email}
+onChange={(e) =>{setNewUser({...newUser,email:e.target.value});
 }} 
 />
 <Input
