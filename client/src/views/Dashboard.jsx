@@ -15,7 +15,7 @@ function Dashboard() {
   const loadTours = async () => {
     const userJwt = getUserjwtToken();
 
-    const response = await axios.get("http://localhost:8080/tours", {
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tours`, {
       headers: {
         Authorization: `Bearer ${userJwt}`,
       },
@@ -45,9 +45,6 @@ function Dashboard() {
       cursor-pointer'
           />
         </Link>
-
-
-
         {
           tours.map((tourItem, index) => {
             return (

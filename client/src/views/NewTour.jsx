@@ -116,7 +116,8 @@ function NewTour() {
   const fileInputRef = useRef();
 
   const addTour = async () => {
-    const response = await axios.post("http://localhost:8080/tours", newTour, {
+    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/tours`, 
+      {
 
       headers: {
         Authorization: `Bearer ${getUserjwtToken()}`,
