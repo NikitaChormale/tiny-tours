@@ -1,89 +1,89 @@
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { useEffect,useState} from 'react';
-import { setTitle} from './../utils';
+import { useEffect, useState } from 'react';
+import { setTitle } from './../utils';
 import Input from "./../components/Input";
 import Button from './../components/Button';
-import {Link} from "react-router";
+import { Link } from "react-router";
 import Navbar from "../components/Navbar";
 
 
 
 function Login() {
 
-  const  [CheskUser,setCheckUser] =useState({
-    email:"",
-    password:"",
+  const [CheskUser, setCheckUser] = useState({
+    email: "",
+    password: "",
   });
 
-   useEffect(() => {
-    setTitle (" LoginTour - TinyTours");
-    },[]);
+  useEffect(() => {
+    setTitle(" LoginTour - TinyTours");
+  }, []);
 
 
-const CheckLoginUsers = async () => {
-  try {
-    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/login`, CheskUser);
+  const CheckLoginUsers = async () => {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/login`, CheskUser);
+       console.log(import.meta.env.VITE_API_BASE_URL);
+      console.log(response.data);
 
-    console.log(response.data);
+      if (response.data.success) {
+        toast.success(response.data.message, { id: "loginsuccess" });
+        setCheckUser({
+          email: "",
+          password: "",
+        });
 
-    if (response.data.success) {
-      toast.success(response.data.message,{id:"loginsuccess"});
-      setCheckUser({
-        email:"",
-        password:"",
-      });
+        const { token, data } = response.data;
+        localStorage.setItem("userjwtToken", token);
+        localStorage.setItem("userData", JSON.stringify(data));
+        setTimeout(() => {
+          window.location.href = "/dashboard";
+        }, 1500)
 
-       const {token,data}= response.data;
-     localStorage.setItem("userjwtToken",token);
-     localStorage.setItem("userData",JSON.stringify(data));
-     setTimeout(()=>{
-      window.location.href="/dashboard";
-     },1500)
-    
-      
-    } else {
-      toast.error(response.data.message,{id:"loginError"});
+
+      } else {
+        toast.error(response.data.message, { id: "loginError" });
+      }
+
+    } catch (error) {
+      console.error(error);
+      toast.error("Server error!");
     }
+  };
+  return (
+    <div >
+      <Navbar />
 
-  } catch (error) {
-    console.error(error);
-    toast.error("Server error!");
-  }
-}; 
-return (
-   <div >
-    <Navbar/>
-    
-   
-<h1>Login</h1>
-    
-    <div className='w-75 block mx-auto mt-20'>
-<Input
-type='email'
-placeholder='Email'
-value={CheskUser.email}
-onChange={(e) =>
-  {setCheckUser({...CheskUser,email:e.target.value});
-}} 
-/>
-<Input
-type='password'
-placeholder='Password'
-value={CheskUser.password}
-onChange={(e) =>
-  {setCheckUser({...CheskUser,password:e.target.value});
-}} 
-/>
-<Button title="Login" onClick={CheckLoginUsers}/>
 
-<Link to ="/signup"  className="mt-2 block text-blue-500">
-Don't have an account? Signup
-</Link>
-</div>
-<Toaster position="top-center" reverseOrder={false}/>
-  </div>
-)
-  }
+      <h1>Login</h1>
+
+      <div className='w-75 block mx-auto mt-20'>
+        <Input
+          type='email'
+          placeholder='Email'
+          value={CheskUser.email}
+          onChange={(e) => {
+            setCheckUser({ ...CheskUser, email: e.target.value });
+          }}
+        />
+        <Input
+          type='password'
+          placeholder='Password'
+          value={CheskUser.password}
+          onChange={(e) => {
+            setCheckUser({ ...CheskUser, password: e.target.value });
+          }}
+        />
+        <Button title="Login" onClick={CheckLoginUsers} />
+
+        <Link to="/signup" className="mt-2 block text-blue-500">
+          Don't have an account? Signup
+        </Link>
+      </div>
+      <Toaster position="top-center" reverseOrder={false} />
+    </div>
+  )
+}
 
 export default Login

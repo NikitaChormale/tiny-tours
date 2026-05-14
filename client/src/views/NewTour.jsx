@@ -84,7 +84,7 @@ function NewTour() {
       });
 
       setProgress(0);
-      fileInput.value="";
+      fileInput.value = "";
     } catch (error) {
       // Handle specific error types provided by the ImageKit SDK.
       if (error instanceof ImageKitAbortError) {
@@ -116,13 +116,13 @@ function NewTour() {
   const fileInputRef = useRef();
 
   const addTour = async () => {
-    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/tours`, 
+    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/tours`,
       {
 
-      headers: {
-        Authorization: `Bearer ${getUserjwtToken()}`,
-      },
-    });
+        headers: {
+          Authorization: `Bearer ${getUserjwtToken()}`,
+        },
+      });
     console.log(response.data);
     if (response.data.success) {
       toast.success(response.data.message);
@@ -213,10 +213,10 @@ function NewTour() {
               key={index}
               imgUrl={photo}
               index={index}
-              onDelete={(url)=>{
+              onDelete={(url) => {
                 setNewTour({
                   ...newTour,
-                  photos:newTour.photos.filter((p)=>p !==url),
+                  photos: newTour.photos.filter((p) => p !== url),
                 });
               }}
               showDelete
@@ -235,7 +235,7 @@ function NewTour() {
             }
           }} />
 
-        {progress >0 ?`Uploading...${progress}`: null}
+        {progress > 0 ? `Uploading...${progress}` : null}
 
 
 
