@@ -107,7 +107,7 @@ const postLogin =async(req,res) => {
       },
       process.env.JWT_SECRET,
       {
-        expiresIn:JWT_EXPIRATION,
+        expiresIn:JWT_EXPIRATION="1m",
       }
     );
     return res.json({

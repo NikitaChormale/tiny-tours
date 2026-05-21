@@ -13,6 +13,7 @@ function Dashboard() {
   const [tours, setTours] = useState([]);
 
   const loadTours = async () => {
+    try{
     const userJwt = getUserjwtToken();
 
     const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tours`, {
@@ -26,12 +27,18 @@ function Dashboard() {
     }
     else {
       toast.error(response.data.message);
-    }
+    }}
+    catch (error) {
+    toast.error("Failed to load tours");
+    console.log(error);
+  }
+
   };
 
   useEffect(() => {
     loadTours();
   }, []);
+  
 
   return (
     <div>

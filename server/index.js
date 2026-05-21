@@ -10,7 +10,7 @@ dotenv.config();
 // routes
 import { getHome ,getHealth} from './controller/health.js';
 import { postSignup ,postLogin} from './controller/auth.js';
-import { getTours, postTours, putTours } from './controller/tours.js';
+import { getTours, postTours, putTours ,getTourById} from './controller/tours.js';
 
 
 
@@ -41,7 +41,9 @@ app.post ("/login",postLogin);
 // tours routes
 app.post("/tours",checkjwt, postTours );
 app.get("/tours",checkjwt,getTours);
-app.put("/tours/:id",checkjwt,putTours)
+app.put("/tours/:id",checkjwt,putTours);
+app.get("/tours/:id",checkjwt,getTourById);
+
 
 
 

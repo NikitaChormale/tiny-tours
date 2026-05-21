@@ -7,9 +7,6 @@ const isUserLogin =() =>{
     const userjwtToken =localStorage.getItem("userjwtToken");
     return !!userjwtToken;
 }; 
-
-
-
  const getUserjwtToken = ()=>{
 return localStorage.getItem("userjwtToken");
  };

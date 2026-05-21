@@ -75,8 +75,6 @@ startDates,
 endDate ,
 photos,
  });
-
-
 return res.json ({
   success:true,
   message:"tour  updated successfully ",
@@ -84,4 +82,21 @@ return res.json ({
   user,
 });
 }
-export { getTours ,postTours ,putTours};
+const getTourById =async(req,res) =>{
+  const{id}= req.params;
+const tour =await Tour.findById(id).populate("user","-password")
+if(! tour){
+  return res.json({
+    success:false,
+    message:"tour not found",
+    data:null,
+  });
+}
+return res.json({
+  success:true,
+  message:"tour fetched successfully",
+  data:tour,
+});
+}
+
+export { getTours ,postTours ,putTours,getTourById};

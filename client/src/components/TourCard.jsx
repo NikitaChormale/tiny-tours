@@ -2,6 +2,8 @@ import React from 'react';
 import { Building2, CircleArrowRight, LandPlot } from "lucide-react";
 import Avatar from '../components/Avatar';
 import PhotoViewer from './PhotoViewer';
+import { Pencil } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 
 function TourCard({
@@ -20,7 +22,7 @@ function TourCard({
 
   return (
 
-    <div className='border border-gray-300 my-10 px-5 py-2 rounded-mb-4 shadow-mb'>
+    <div className=' relative border border-gray-300 my-10 px-5 py-2 rounded-mb-4 shadow-mb'>
       <h2 className='text-lg'>{title}</h2>
       <p className='text-xs text-gray-500'>{description}</p>
       <p className='my-2'>
@@ -54,7 +56,10 @@ function TourCard({
         ))}
 
       </div>
-
+      <Link to={`/tours/${_id}/edit-tour`}>
+  <Pencil className='absolute top-2 right-2 h-6 w-6 cursor-pointer' />
+</Link>
+   
     </div>
 
   );

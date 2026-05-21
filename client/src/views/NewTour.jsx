@@ -114,26 +114,38 @@ function NewTour() {
   const [progress, setProgress] = useState(0);
 
   const fileInputRef = useRef();
-
-  const addTour = async () => {
-    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/tours`,
+const addTour = async () => {
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/tours`,
+      newTour,
       {
-
         headers: {
           Authorization: `Bearer ${getUserjwtToken()}`,
         },
-      });
+      }
+    );
+
     console.log(response.data);
+
     if (response.data.success) {
       toast.success(response.data.message);
-    }
-    else {
+
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 1000);
+    } else {
       toast.error(response.data.message);
     }
-  };
-  console.log(getUserjwtToken());
+  } catch (error) {
+    console.log(error);
+
+    toast.error("Failed to add tour");
+  }
+};
 
 
+  
   useEffect(() => {
     setTitle("AddTour - TinyTours");
   }, []);
