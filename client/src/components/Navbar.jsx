@@ -31,6 +31,23 @@ function Navbar() {
           🌍 <span>TourMate</span>
         </div>
       </Link>
+      <div className="flex items-center gap-6 text-lg font-medium">
+        <Link to="/" className="hover:text-white transition duration-300">
+          Home
+        </Link>
+        <Link to="/login" className="hover:text-white transition duration-300">
+          Login
+        </Link>
+      <Link to="/signup" className="hover:text-white transition duration-300">
+          Signup
+        </Link>
+      <Link to="/dashboard" className="hover:text-white transition duration-300">
+          Dashboard
+        </Link>
+        <Link to="/newtours" className="hover:text-white transition duration-300">
+          New Tours
+        </Link>
+      </div>
       <div>
         {user?.name ?(
           <div className='flex items-center gap-2'>
@@ -38,12 +55,15 @@ function Navbar() {
            Hello, {user.name}!
             <Button variant="danger" title="Logout" onClick={handleLogout} />
           </div>) : (
-          <Link className='bg-white text-black px-3 py-1 rounded mr-2' to="/login">
+            
+          <Link className="bg-orange-500 text-white
+           hover:bg-orange-600 focus:ring-orange-300 px-5 py-2.5 text-base"
+           to="/login">
             Login
           </Link>
-
-        )}
+        )} 
       </div>
+      <Button variant="primary" title="Logout" onClick={handleLogout} />
       <Toaster />
     </div>
   );

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { setTitle } from "../utils";
 import Navbar from "../components/Navbar";
 
+
 function Home() {
 
   useEffect(() => {
@@ -215,14 +216,8 @@ function Home() {
       </div>
 
       {/* FOOTER */}
-      <footer className="bg-white py-8 text-center border-t border-orange-100">
-
-        <p className="text-gray-500">
-          © 2026 TinyTours. Designed with ❤️ for travelers.
-        </p>
-
-      </footer>
-
+     
+      
     </div>
 
   );

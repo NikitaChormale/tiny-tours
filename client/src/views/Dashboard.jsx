@@ -5,13 +5,13 @@ import Navbar from "../components/Navbar";
 import toast, { Toaster } from "react-hot-toast";
 import { getUserjwtToken } from "../utils";
 import TourCard from "../components/TourCard";
-
 import {
   Plus,
   Plane,
   MapPinned,
   CalendarDays,
 } from "lucide-react";
+
 
 function Dashboard() {
 
@@ -359,7 +359,7 @@ function Dashboard() {
       </div>
 
       <Toaster position="top-center" />
-
+    
     </div>
   );
 }
