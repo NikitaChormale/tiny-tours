@@ -40,9 +40,11 @@ const postSignup =  async(req, res) => {
       data:null,
     });
    }
+   console.log("LOGIN HIT");
+console.log(req.body);
 
-   const salt =bcrypt.genSaltSync(10);
-   const encrytedpassword = bcrypt.hashSync(password,salt);
+   const salt=bcrypt.genSaltSync(10);
+   const encrytedpassword=bcrypt.hashSync(password,salt);
 
 
  const newUser=new User({
@@ -92,7 +94,7 @@ const postLogin =async(req,res) => {
     return res.json ({
       success:false,
       message: "user doesn't exist with this email , please sign up",
-      data: null,
+      data:null,
     });
   }
   const ispasswordCorrect =bcrypt .compareSync (password ,existingUser.password);
@@ -107,7 +109,7 @@ const postLogin =async(req,res) => {
       },
       process.env.JWT_SECRET,
       {
-        expiresIn:JWT_EXPIRATION="1m",
+        expiresIn:JWT_EXPIRATION,
       }
     );
     return res.json({

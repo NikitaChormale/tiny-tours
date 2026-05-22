@@ -42,7 +42,7 @@ const getTours= async(req,res) => {
     });
   }
 };
-
+//edit tour
 const putTours = async(req,res) => {
   const user= req.user;
   const userId= user.id;
@@ -63,6 +63,7 @@ if(tour.user.toString()!==userId){
   data:null,
 });
 }
+// delete tour
 
 const {title, description ,cities,startDates,endDate ,photos}=
  req.body
@@ -98,5 +99,46 @@ return res.json({
   data:tour,
 });
 }
+const deleteTour = async (req, res) => {
 
-export { getTours ,postTours ,putTours,getTourById};
+  try {
+
+    const { id } = req.params;
+
+    const tour = await Tour.findById(id);
+
+    if (!tour) {
+      return res.json({
+        success: false,
+        message: "Tour not found",
+      });
+    }
+
+    // check owner
+    if (tour.user.toString() !== req.user.id) {
+
+      return res.json({
+        success: false,
+        message: "Unauthorized",
+      });
+
+    }
+
+    await Tour.findByIdAndDelete(id);
+
+    return res.json({
+      success: true,
+      message: "Tour deleted successfully",
+    });
+
+  } catch (error) {
+
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
+};
+
+export { getTours ,postTours ,putTours,getTourById, deleteTour,};
