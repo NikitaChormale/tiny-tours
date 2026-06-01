@@ -65,14 +65,14 @@ if(tour.user.toString()!==userId){
 }
 // delete tour
 
-const {title, description ,cities,startDates,endDate ,photos}=
+const {title, description ,cities,startDate,endDate ,photos}=
  req.body
 
  const  updatedTour = await tour.updateOne({_id:id},{
 title, 
 description ,
 cities,
-startDates,
+startDate,
 endDate ,
 photos,
  });
