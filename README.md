@@ -56,17 +56,17 @@ This project is created for learning and assessment purposes.
 
 ### Home Page
 
-![Home Page](./src/assets/home%20page3.png)
+![Home Page](https://github.com/NikitaChormale/tiny-tours/blob/main/client/src/assets/home%20page3.png)
 
 ### Sign-up Tour
 
-![Create Tour](./src/assets/signup%20page.png)
+![Create Tour](https://github.com/NikitaChormale/tiny-tours/blob/main/client/src/assets/signup%20page.png)
 
 ### Login Page
 
-![Login Page](./src/assets/login%20pahe.png)
+![Login Page](https://github.com/NikitaChormale/tiny-tours/blob/main/client/src/assets/login%20pahe.png)
 
 ### Dashboard
 
-![Dashboard](./src/assets/dashboard%20page.png)
+![Dashboard](https://github.com/NikitaChormale/tiny-tours/blob/main/client/src/assets/dashboard%20page.png)
 
